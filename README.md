@@ -1,6 +1,6 @@
 # Real-Time Question Detection and Answering from IP Camera Feed
 
-This project captures a live video stream from an IP camera, detects text using OCR, identifies questions, and answers them using a local LLM (Mistral 7B in GGUF format) running on CPU.
+This project captures a live video stream from an IP camera(in my case I used my phone with an app called IP camera), detects text using OCR, identifies questions, and answers them using a local LLM (Mistral 7B in GGUF format) running on CPU.
 
 ## Features
 
