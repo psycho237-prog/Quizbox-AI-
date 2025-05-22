@@ -10,9 +10,7 @@ This project captures a live video stream from an IP camera, detects text using 
 - Local LLM (no internet required) for answering questions
 - Live visual feedback using OpenCV
 
-## Demo
 
-*Include a demo GIF or image here if available*
 
 ## Requirements
 
