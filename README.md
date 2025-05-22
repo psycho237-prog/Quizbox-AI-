@@ -24,8 +24,8 @@ This project captures a live video stream from an IP camera(in my case I used my
 ## Installation
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/psycho237-prog/Quizbox-AI-
+cd Quizbox-AI-
 pip install -r requirements.txt
 ```
 
