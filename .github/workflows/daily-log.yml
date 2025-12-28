@@ -47,7 +47,8 @@ jobs:
             HOUR=$((9 + RANDOM % 13))      # 09:00 - 21:00 UTC
             MINUTE=$((RANDOM % 60))
             TIME=$(printf "%02d:%02d UTC" $HOUR $MINUTE)
-            MESSAGE=${MESSAGES[$RANDOM % ${#MESSAGES[@]}]}
+            # FIX: Proper bash arithmetic for array indexing
+            MESSAGE=${MESSAGES[$((RANDOM % ${#MESSAGES[@]}))]}
             echo "- **$DATE ($TIME)** — $MESSAGE" >> daily-log.md
           done
 
@@ -56,11 +57,30 @@ jobs:
         env:
           TOKEN: ${{ secrets.TOKEN }}
         run: |
+          # Verify TOKEN exists
+          if [ -z "$TOKEN" ]; then
+            echo "ERROR: TOKEN secret is not set"
+            exit 1
+          fi
+          
           git add daily-log.md
           if git diff --cached --quiet; then
             echo "No changes to commit today."
             exit 0
           fi
+          
           git commit -m "docs: update daily dev log"
-          git pull --rebase origin main
-          git push https://$TOKEN@github.com/psycho237-prog/Quizbox-AI.git main
+          
+          # Pull with rebase and handle conflicts
+          if ! git pull --rebase origin main; then
+            echo "ERROR: Failed to rebase. There may be conflicts."
+            exit 1
+          fi
+          
+          # FIX: Corrected repository name (added trailing hyphen)
+          if ! git push https://$TOKEN@github.com/psycho237-prog/Quizbox-AI-.git main; then
+            echo "ERROR: Failed to push changes"
+            exit 1
+          fi
+          
+          echo "✅ Successfully updated daily log"
