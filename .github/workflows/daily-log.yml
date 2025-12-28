@@ -54,7 +54,7 @@ jobs:
       # 4️⃣ Commit and push safely using PAT
       - name: Commit and push changes
         env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          TOKEN: ${{ secrets.TOKEN }}
         run: |
           git add daily-log.md
           if git diff --cached --quiet; then
@@ -63,4 +63,4 @@ jobs:
           fi
           git commit -m "docs: update daily dev log"
           git pull --rebase origin main
-          git push https://$PAT_TOKEN@github.com/psycho237-prog/Quizbox-AI.git main
+          git push https://$TOKEN@github.com/psycho237-prog/Quizbox-AI.git main
