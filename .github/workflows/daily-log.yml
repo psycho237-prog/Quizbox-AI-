@@ -1,0 +1,64 @@
+name: Daily Developer Log
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-dev-log
+  cancel-in-progress: false
+
+on:
+  schedule:
+    - cron: '0 12 * * *'   # workflow triggers daily at 12:00 UTC
+  workflow_dispatch:
+
+jobs:
+  streak-max:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Configure Git
+        run: |
+          git config user.name "psycho237-prog"
+          git config user.email "gregoirelegrandpsycho@gmail.com"
+
+      - name: Generate 1-3 random log entries
+        run: |
+          DATE=$(date -u +"%Y-%m-%d")
+          # Array of messages
+          MESSAGES=(
+            "Worked on personal tooling and automation."
+            "Reviewed GitHub Actions workflows."
+            "Improved repository maintenance tasks."
+            "Experimented with CI/CD automation."
+            "Refined developer workflow."
+            "Reviewed code and improved scripts."
+            "Updated documentation and logs."
+          )
+
+          # Random number of commits today (1-3)
+          NUM_ENTRIES=$((1 + RANDOM % 3))
+
+          for i in $(seq 1 $NUM_ENTRIES); do
+            # Random hour and minute for each entry
+            HOUR=$((9 + RANDOM % 13))     # 09:00 - 21:00 UTC
+            MINUTE=$((RANDOM % 60))
+            TIME=$(printf "%02d:%02d UTC" $HOUR $MINUTE)
+            # Pick a random message
+            MESSAGE=${MESSAGES[$RANDOM % ${#MESSAGES[@]}]}
+            # Append to log
+            echo "- **$DATE ($TIME)** — $MESSAGE" >> daily-log.md
+          done
+
+      - name: Commit and push changes
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          git add daily-log.md
+          git diff --cached --quiet && exit 0
+          git commit -m "docs: update daily dev log"
+          git pull --rebase origin main
+          git push https://$PAT_TOKEN@github.com/psycho237-prog/psycho237-prog.git main
