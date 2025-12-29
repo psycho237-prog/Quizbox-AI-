@@ -1,2 +1,2 @@
-- **2025-12-28 (12:17 UTC)** — Tested and refined Quizbox features.
-- **2025-12-28 (21:42 UTC)** — Refined AI logic and prompts.
+
+- **2025-12-29 (13:55 UTC)** — Updated documentation for Quizbox-AI.
