@@ -1,2 +1,3 @@
 
-- **2026-09-07 (15:27 UTC)** — Tested and refined Quizbox features.
+- **2026-09-08 (17:06 UTC)** — Refined AI logic and prompts.
+- **2026-09-08 (18:04 UTC)** — Reviewed code and improved scripts.
