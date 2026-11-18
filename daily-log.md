@@ -1,3 +1,3 @@
 
-- **2026-11-17 (19:49 UTC)** — Updated documentation for Quizbox-AI.
-- **2026-11-17 (13:51 UTC)** — Refined AI logic and prompts.
+- **2026-11-18 (20:46 UTC)** — Refined AI logic and prompts.
+- **2026-11-18 (15:27 UTC)** — Reviewed code and improved scripts.
